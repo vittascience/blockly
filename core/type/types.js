@@ -142,7 +142,7 @@ Blockly.Types.DECIMAL.addCompatibleTypes([
  * @param {Array<Blockly.Type>} compatibleTypes_ List of types this Type is
  *     compatible with.
  */
-Blockly.Types.addType = function(typeId_, typeMsgName_, compatibleTypes_) {
+Blockly.Types.addType = function (typeId_, typeMsgName_, compatibleTypes_) {
     // The Id is used as the key from the value pair in the BlocklyTypes object
     var key = typeId_.toUpperCase().replace(/ /g, '_');
     if (Blockly.Types[key] !== undefined) {
@@ -160,7 +160,7 @@ Blockly.Types.addType = function(typeId_, typeMsgName_, compatibleTypes_) {
  * This array only contains the valid types, excluding any error or temp types.
  * @return {!Array<Array<string>>} Blockly types in the format described above.
  */
-Blockly.Types.getValidTypeArray = function() {
+Blockly.Types.getValidTypeArray = function () {
     var typesArray = [];
     for (var typeKey in Blockly.Types) {
         if ((typeKey !== 'UNDEF') && (typeKey !== 'CHILD_BLOCK_MISSING') &&
@@ -174,41 +174,41 @@ Blockly.Types.getValidTypeArray = function() {
 };
 
 /**
-* Return type defined in BLocklys.Types with the typeId
-* @param {String} typeId
-* @return {Blockly.Type} type
-*/
-Blockly.Types.getTypeWithId = function(id) {
-  for (let type in Blockly.Types) {
-    if (id == Blockly.Types[type].typeId) return Blockly.Types[type]
-  }
-  throw "type with id '" + id + "' is not defined in Blockly.Types \n\t at Blockly.Types.getTypeWithId()" 
+ * Return type defined in BLocklys.Types with the typeId
+ * @param {String} typeId
+ * @return {Blockly.Type} type
+ */
+Blockly.Types.getTypeWithId = function (id) {
+    for (var type in Blockly.Types) {
+        if (id == Blockly.Types[type].typeId) return Blockly.Types[type]
+    }
+    throw "type with id '" + id + "' is not defined in Blockly.Types \n\t at Blockly.Types.getTypeWithId()"
 };
 
 /**
-* Return name of first variable from block containing field variables
-* @param {Blockly.Block} block
-* @param {int} row
-* @return {String} varName
-*/
-Blockly.Types.getFieldVariableNameByBlock = function(block, row) {
-      return block.inputList[0].fieldRow[row].variable_.name;
+ * Return name of first variable from block containing field variables
+ * @param {Blockly.Block} block
+ * @param {int} row
+ * @return {String} varName
+ */
+Blockly.Types.getFieldVariableNameByBlock = function (block, row) {
+    return block.inputList[0].fieldRow[row].variable_.name;
 };
-  
+
 /**
-* Procedure to get child type of a block
-* @param {Blockly.Block} block
-* @return {Blockly.Type}
-*/
-Blockly.Types.getChildBlockType = function(child) {
-  if (child.outputConnection && child.outputConnection.check_) {
-    var typeCheck = child.outputConnection.check_[0];
-    return Blockly.Types.getTypeWithId(typeCheck);
-  } else if (child.getBlockType) {
-      return child.getBlockType();
-  } else {
-      return Blockly.Types.CHILD_BLOCK_MISSING;
-  }
+ * Procedure to get child type of a block
+ * @param {Blockly.Block} block
+ * @return {Blockly.Type}
+ */
+Blockly.Types.getChildBlockType = function (child) {
+    if (child.outputConnection && child.outputConnection.check_) {
+        var typeCheck = child.outputConnection.check_[0];
+        return Blockly.Types.getTypeWithId(typeCheck);
+    } else if (child.getBlockType) {
+        return child.getBlockType();
+    } else {
+        return Blockly.Types.CHILD_BLOCK_MISSING;
+    }
 };
 
 /**
@@ -229,7 +229,7 @@ Blockly.Types.regExpFloat_ = new RegExp(/^-?[0-9]*[.][0-9]+$/);
  * @param {string} numberString String of the number to identify.
  * @return {!Blockly.Type} Blockly type.
  */
-Blockly.Types.identifyNumber = function(numberString) {
+Blockly.Types.identifyNumber = function (numberString) {
     if (Blockly.Types.regExpInt_.test(numberString)) {
         var intValue = parseInt(numberString);
         if (isNaN(intValue)) {
