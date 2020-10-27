@@ -5,11 +5,17 @@
  */
 
 suite('Image Fields', function() {
+  setup(function() {
+    sharedTestSetup.call(this);
+  });
+  teardown(function() {
+    sharedTestTeardown.call(this);
+  });
   function assertValue(imageField, expectedValue, expectedText) {
     var actualValue = imageField.getValue();
     var actualText = imageField.getText();
-    assertEquals(actualValue, expectedValue);
-    assertEquals(actualText, expectedText);
+    chai.assert.equal(actualValue, expectedValue);
+    chai.assert.equal(actualText, expectedText);
   }
   suite('Constructor', function() {
     test('Empty', function() {
@@ -121,9 +127,6 @@ suite('Image Fields', function() {
           console.log('on click');
         };
       });
-      teardown(function() {
-        delete this.onClick;
-      });
       test('JS Constructor', function() {
         var field = new Blockly.FieldImage('src', 10, 10, null, this.onClick);
         chai.assert.equal(field.clickHandler_, this.onClick);
@@ -136,7 +139,7 @@ suite('Image Fields', function() {
       test('Remove Click Handler', function() {
         var field = new Blockly.FieldImage('src', 10, 10, null, this.onClick);
         field.setOnClickHandler(null);
-        chai.assert.equal(field.clickHandler_, null);
+        chai.assert.isNull(field.clickHandler_);
       });
     });
     suite('Alt', function() {
@@ -154,10 +157,13 @@ suite('Image Fields', function() {
         chai.assert.equal(field.altText_, 'alt');
       });
       test('Deprecated - setText', function() {
+        var deprecateWarnSpy = createDeprecationWarningStub();
         var field = new Blockly.FieldImage('src', 10, 10, 'alt');
         chai.assert.throws(function() {
           field.setText('newAlt');
         });
+        assertSingleDeprecationWarningCall(deprecateWarnSpy,
+            'Field.prototype.setText');
       });
       suite('SetAlt', function() {
         setup(function() {

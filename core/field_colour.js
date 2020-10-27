@@ -43,8 +43,7 @@ goog.require('Blockly.utils.Size');
  */
 Blockly.FieldColour = function(opt_value, opt_validator, opt_config) {
   Blockly.FieldColour.superClass_.constructor.call(
-      this, opt_value || Blockly.FieldColour.COLOURS[0],
-      opt_validator, opt_config);
+      this, opt_value, opt_validator, opt_config);
 
   /**
    * The field's colour picker element.
@@ -220,7 +219,7 @@ Blockly.FieldColour.prototype.doValueUpdate_ = function(newValue) {
   this.value_ = newValue;
   if (this.borderRect_) {
     this.borderRect_.style.fill = newValue;
-  } else if (this.sourceBlock_) {
+  } else if (this.sourceBlock_ && this.sourceBlock_.rendered) {
     this.sourceBlock_.pathObject.svgPath.setAttribute('fill', newValue);
     this.sourceBlock_.pathObject.svgPath.setAttribute('stroke', '#fff');
   }
@@ -269,6 +268,13 @@ Blockly.FieldColour.COLOURS = [
 ];
 
 /**
+ * The default value for this field.
+ * @type {*}
+ * @protected
+ */
+Blockly.FieldColour.prototype.DEFAULT_VALUE = Blockly.FieldColour.COLOURS[0];
+
+/**
  * An array of tooltip strings for the palette.  If not the same length as
  * COLOURS, the colour's hex code will be used for any missing titles.
  * All colour pickers use this unless overridden with setColours.
@@ -311,7 +317,7 @@ Blockly.FieldColour.prototype.setColumns = function(columns) {
 
 /**
  * Create and show the colour field's editor.
- * @private
+ * @protected
  */
 Blockly.FieldColour.prototype.showEditor_ = function() {
   this.picker_ = this.dropdownCreate_();

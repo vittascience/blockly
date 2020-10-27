@@ -12,6 +12,7 @@
 
 goog.provide('Blockly.FieldVariable');
 
+goog.require('Blockly.constants');
 goog.require('Blockly.Events');
 goog.require('Blockly.Events.BlockChange');
 goog.require('Blockly.FieldDropdown');
@@ -97,13 +98,6 @@ Blockly.FieldVariable.fromJson = function(options) {
   return new Blockly.FieldVariable(
       varName, undefined, undefined, undefined, options);
 };
-
-/**
- * The workspace that this variable field belongs to.
- * @type {?Blockly.Workspace}
- * @private
- */
-Blockly.FieldVariable.prototype.workspace_ = null;
 
 /**
  * Serializable fields are saved by the XML renderer, non-serializable fields

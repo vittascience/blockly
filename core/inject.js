@@ -25,9 +25,12 @@ goog.require('Blockly.Tooltip');
 goog.require('Blockly.user.keyMap');
 goog.require('Blockly.utils');
 goog.require('Blockly.utils.dom');
+goog.require('Blockly.utils.Svg');
 goog.require('Blockly.utils.userAgent');
 goog.require('Blockly.WorkspaceDragSurfaceSvg');
 goog.require('Blockly.WorkspaceSvg');
+
+goog.requireType('Blockly.utils.Metrics');
 
 
 /**
@@ -111,20 +114,22 @@ Blockly.createDom_ = function(container, options) {
     ...
   </svg>
   */
-  var svg = Blockly.utils.dom.createSvgElement('svg', {
-    'xmlns': Blockly.utils.dom.SVG_NS,
-    'xmlns:html': Blockly.utils.dom.HTML_NS,
-    'xmlns:xlink': Blockly.utils.dom.XLINK_NS,
-    'version': '1.1',
-    'class': 'blocklySvg',
-    'tabindex': '0'
-  }, container);
+  var svg = Blockly.utils.dom.createSvgElement(
+      Blockly.utils.Svg.SVG, {
+        'xmlns': Blockly.utils.dom.SVG_NS,
+        'xmlns:html': Blockly.utils.dom.HTML_NS,
+        'xmlns:xlink': Blockly.utils.dom.XLINK_NS,
+        'version': '1.1',
+        'class': 'blocklySvg',
+        'tabindex': '0'
+      }, container);
   /*
   <defs>
     ... filters go here ...
   </defs>
   */
-  var defs = Blockly.utils.dom.createSvgElement('defs', {}, svg);
+  var defs = Blockly.utils.dom.createSvgElement(
+      Blockly.utils.Svg.DEFS, {}, svg);
   // Each filter/pattern needs a unique ID for the case of multiple Blockly
   // instances on a page.  Browser behaviour becomes undefined otherwise.
   // https://neil.fraser.name/news/2015/11/01/
@@ -162,7 +167,7 @@ Blockly.createMainWorkspace_ = function(svg, options, blockDragSurface,
 
   if (!wsOptions.hasCategories && wsOptions.languageTree) {
     // Add flyout as an <svg> that is a sibling of the workspace svg.
-    var flyout = mainWorkspace.addFlyout('svg');
+    var flyout = mainWorkspace.addFlyout(Blockly.utils.Svg.SVG);
     Blockly.utils.dom.insertAfter(flyout, svg);
   }
   if (wsOptions.hasTrashcan) {
@@ -307,7 +312,7 @@ Blockly.createMainWorkspace_ = function(svg, options, blockDragSurface,
           }
           if (e) {
             if (!e.group && object) {
-              console.log('WARNING: Moved object in bounds but there was no' +
+              console.warn('Moved object in bounds but there was no' +
                   ' event group. This may break undo.');
             }
             if (oldGroup !== null) {
@@ -364,8 +369,10 @@ Blockly.init_ = function(mainWorkspace) {
     } else if (flyout) {
       // Build a fixed flyout with the root blocks.
       flyout.init(mainWorkspace);
-      flyout.show(options.languageTree.childNodes);
-      flyout.scrollToStart();
+      flyout.show(options.languageTree);
+      if (typeof flyout.scrollToStart == 'function') {
+        flyout.scrollToStart();
+      }
     }
   }
 
