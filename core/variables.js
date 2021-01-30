@@ -1,18 +1,7 @@
 /**
  * @license
  * Copyright 2012 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * SPDX-License-Identifier: Apache-2.0
  */
 
 /**
@@ -166,14 +155,41 @@ Blockly.Variables.flyoutCategoryBlocks = function(workspace) {
 
   var xmlList = [];
   if (variableModelList.length > 0) {
+
     // New variables are added to the end of the variableModelList.
     var mostRecentVariable = variableModelList[variableModelList.length - 1];
+    
     if (Blockly.Blocks['variables_set']) {
+      // Addition of the variables_set block with number 0 in the xml variable category
       var block = Blockly.utils.xml.createElement('block');
       block.setAttribute('type', 'variables_set');
-      block.setAttribute('gap', Blockly.Blocks['variables_increment'] ? 8 : 24);
-      block.appendChild(
-          Blockly.Variables.generateVariableFieldDom(mostRecentVariable));
+      block.setAttribute('gap', 12);
+      block.appendChild(Blockly.Variables.generateVariableFieldDom(mostRecentVariable));
+      if (Blockly.Blocks['math_number']) {
+        var value = Blockly.Xml.textToDom(
+            '<value name="VALUE">' +
+            '<shadow type="math_number">' +
+            '<field name="NUM">0</field>' +
+            '</shadow>' +
+            '</value>');
+        block.appendChild(value);
+      }
+      xmlList.push(block);
+
+      // Addition of the variables_set block with string "" in the xml variable category
+      block = Blockly.utils.xml.createElement('block');
+      block.setAttribute('type', 'variables_set');
+      block.setAttribute('gap', 12);
+      block.appendChild(Blockly.Variables.generateVariableFieldDom(mostRecentVariable));
+      if (Blockly.Blocks['text']) {
+        var value = Blockly.Xml.textToDom(
+            '<value name="VALUE">' +
+            '<shadow type="text">' +
+            '<field name="TEXT"></field>' +
+            '</shadow>' +
+            '</value>');
+        block.appendChild(value);
+      }
       xmlList.push(block);
     }
 
@@ -181,29 +197,43 @@ Blockly.Variables.flyoutCategoryBlocks = function(workspace) {
     if (Blockly.Blocks['variables_increment']) {
       var block = Blockly.utils.xml.createElement('block');
       block.setAttribute('type', 'variables_increment');
-      block.setAttribute('gap', Blockly.Blocks['variables_get'] ? 20 : 8);
+      block.setAttribute('gap', Blockly.Blocks['variables_force_type'] ? 12 : 24);
       block.appendChild(Blockly.Variables.generateVariableFieldDom(mostRecentVariable));
-      var value = Blockly.Xml.textToDom(
-          '<value name="DELTA">' +
-          '<shadow type="math_number">' +
-          '<field name="NUM">1</field>' +
-          '</shadow>' +
-          '</value>');
-      block.appendChild(value);
+      if (Blockly.Blocks['math_number']) {
+        var value = Blockly.Xml.textToDom(
+            '<value name="DELTA">' +
+            '<shadow type="math_number">' +
+            '<field name="NUM">1</field>' +
+            '</shadow>' +
+            '</value>');
+        block.appendChild(value);
+      }
       xmlList.push(block);
     }
 
-    // Addition of the variables_set_type block in the xml variable category
-    if (Blockly.Blocks['variables_set']) {
+    // Addition of the variables_force_type block in the xml variable category
+    if (Blockly.Blocks['variables_force_type']) {
       var block = Blockly.utils.xml.createElement('block');
-      block.setAttribute('type', 'variables_set');
-      block.setAttribute('gap', Blockly.Blocks['variables_get'] ? 24 : 8);
+      block.setAttribute('type', 'variables_force_type');
+      block.setAttribute('gap', Blockly.Blocks['variables_type_of'] ? 12 : 24);
+      if (Blockly.Blocks['text']) {
+        var value = Blockly.Xml.textToDom(
+            '<value name="VALUE">' +
+            '<shadow type="math_number">' +
+            '<field name="NUM">0</field>' +
+            '</shadow>' +
+            '</value>');
+        block.appendChild(value);
+      }
+      xmlList.push(block);
+    }
+
+    // Addition of the variables_type_of block in the xml variable category
+    if (Blockly.Blocks['variables_type_of']) {
+      var block = Blockly.utils.xml.createElement('block');
+      block.setAttribute('type', 'variables_type_of');
+      block.setAttribute('gap', 24);
       block.appendChild(Blockly.Variables.generateVariableFieldDom(mostRecentVariable));
-      var value = Blockly.Xml.textToDom(
-          '<value name="VALUE">' +
-          '<block type="variables_set_type"></block>' +
-          '</value>');
-      block.appendChild(value);
       xmlList.push(block);
     }
 
