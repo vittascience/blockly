@@ -228,13 +228,10 @@ Blockly.MenuItem.prototype.setHighlighted = function(highlight) {
     // goog-menuitem-highlight is deprecated, use blocklyMenuItemHighlight.
     // May 2020.
     var name = 'blocklyMenuItemHighlight';
-    var nameDep = 'goog-menuitem-highlight';
     if (highlight) {
       Blockly.utils.dom.addClass(el, name);
-      Blockly.utils.dom.addClass(el, nameDep);
     } else {
       Blockly.utils.dom.removeClass(el, name);
-      Blockly.utils.dom.removeClass(el, nameDep);
     }
   }
 };
