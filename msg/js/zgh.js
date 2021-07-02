@@ -423,7 +423,6 @@ Blockly.Msg["PROCEDURES_DEFRETURN_TITLE"] = Blockly.Msg["PROCEDURES_DEFNORETURN_
 Blockly.Msg["TEXT_APPEND_VARIABLE"] = Blockly.Msg["VARIABLES_DEFAULT_NAME"];
 Blockly.Msg["TEXT_CREATE_JOIN_ITEM_TITLE_ITEM"] = Blockly.Msg["VARIABLES_DEFAULT_NAME"];
 
-<<<<<<< HEAD
 Blockly.Msg["LOGIC_HUE"] = "210";
 Blockly.Msg["LOOPS_HUE"] = "120";
 Blockly.Msg["MATH_HUE"] = "230";
@@ -433,14 +432,3 @@ Blockly.Msg["COLOUR_HUE"] = "20";
 Blockly.Msg["VARIABLES_HUE"] = "330";
 Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
 Blockly.Msg["PROCEDURES_HUE"] = "290";
-=======
-Blockly.Msg["MATH_HUE"] = "230";
-Blockly.Msg["LOOPS_HUE"] = "120";
-Blockly.Msg["LISTS_HUE"] = "260";
-Blockly.Msg["LOGIC_HUE"] = "210";
-Blockly.Msg["VARIABLES_HUE"] = "330";
-Blockly.Msg["TEXTS_HUE"] = "160";
-Blockly.Msg["PROCEDURES_HUE"] = "290";
-Blockly.Msg["COLOUR_HUE"] = "20";
-Blockly.Msg["VARIABLES_DYNAMIC_HUE"] = "310";
->>>>>>> 64188ae27297b1ca23a3244cc987dfbfc6e98f34
