@@ -4900,17 +4900,17 @@ declare module Blockly {
     
 }
 
-declare module Blockly.FieldCheckboxUpgraded {
+declare module Blockly.FieldCheckColors {
 
     /**
      * Construct a FieldCheckboxUpgraded from a JSON arg object.
      * @param {!Object} options A JSON object with options (checked).
-     * @return {!Blockly.FieldCheckboxUpgraded} The new field instance.
+     * @return {!Blockly.FieldCheckColors} The new field instance.
      * @package
      * @nocollapse
      */
-    function fromJson(options: Object): Blockly.FieldCheckboxUpgraded;
-    
+    function fromJson(options: Object): Blockly.FieldCheckColors;
+
 }
 
 

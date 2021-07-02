@@ -10,7 +10,7 @@
  */
  'use strict';
 
- goog.provide('Blockly.FieldCheckboxUpgraded');
+ goog.provide('Blockly.FieldCheckColors');
  
  /** @suppress {extraRequire} */
  goog.require('Blockly.Events.BlockChange');
@@ -34,7 +34,7 @@
   * @extends {Blockly.Field}
   * @constructor
   */
- Blockly.FieldCheckboxUpgraded = function(opt_value, opt_validator, opt_config) {
+ Blockly.FieldCheckColors = function(opt_value, opt_validator, opt_config) {
    /**
     * Character for the check mark. Used to apply a different check mark
     * character to individual fields.
@@ -43,27 +43,27 @@
     */
    this.checkChar_ = null;
  
-   Blockly.FieldCheckboxUpgraded.superClass_.constructor.call(
+   Blockly.FieldCheckColors.superClass_.constructor.call(
        this, opt_value, opt_validator, opt_config);
  };
- Blockly.utils.object.inherits(Blockly.FieldCheckboxUpgraded, Blockly.Field);
+ Blockly.utils.object.inherits(Blockly.FieldCheckColors, Blockly.Field);
  
  /**
   * The default value for this field.
   * @type {*}
   * @protected
   */
- Blockly.FieldCheckboxUpgraded.prototype.DEFAULT_VALUE = false;
+ Blockly.FieldCheckColors.prototype.DEFAULT_VALUE = false;
  
  /**
   * Construct a FieldCheckboxUpgraded from a JSON arg object.
   * @param {!Object} options A JSON object with options (checked).
-  * @return {!Blockly.FieldCheckboxUpgraded} The new field instance.
+  * @return {!Blockly.FieldCheckColors} The new field instance.
   * @package
   * @nocollapse
   */
- Blockly.FieldCheckboxUpgraded.fromJson = function(options) {
-   return new Blockly.FieldCheckboxUpgraded(options['checked'], undefined, options);
+ Blockly.FieldCheckColors.fromJson = function(options) {
+   return new Blockly.FieldCheckColors(options['checked'], undefined, options);
  };
  
  /**
@@ -71,19 +71,19 @@
   * @type {string}
   * @const
   */
- Blockly.FieldCheckboxUpgraded.CHECK_CHAR = '\u2713';
+ Blockly.FieldCheckColors.CHECK_CHAR = '\u2713';
  
  /**
   * Serializable fields are saved by the XML renderer, non-serializable fields
   * are not. Editable fields should also be serializable.
   * @type {boolean}
   */
- Blockly.FieldCheckboxUpgraded.prototype.SERIALIZABLE = true;
+ Blockly.FieldCheckColors.prototype.SERIALIZABLE = true;
  
  /**
   * Mouse cursor style when over the hotspot that initiates editability.
   */
- Blockly.FieldCheckboxUpgraded.prototype.CURSOR = 'default';
+ Blockly.FieldCheckColors.prototype.CURSOR = 'default';
  
  /**
   * Configure the field based on the given map of options.
@@ -91,8 +91,8 @@
   * @protected
   * @override
   */
- Blockly.FieldCheckboxUpgraded.prototype.configure_ = function(config) {
-   Blockly.FieldCheckboxUpgraded.superClass_.configure_.call(this, config);
+ Blockly.FieldCheckColors.prototype.configure_ = function(config) {
+   Blockly.FieldCheckColors.superClass_.configure_.call(this, config);
    if (config['checkCharacter']) {
      this.checkChar_ = config['checkCharacter'];
    }
@@ -102,8 +102,8 @@
   * Create the block UI for this checkbox.
   * @package
   */
- Blockly.FieldCheckboxUpgraded.prototype.initView = function() {
-   Blockly.FieldCheckboxUpgraded.superClass_.initView.call(this);
+ Blockly.FieldCheckColors.prototype.initView = function() {
+   Blockly.FieldCheckColors.superClass_.initView.call(this);
  
    Blockly.utils.dom.addClass(
        /** @type {!SVGTextElement} **/ (this.textElement_), 'blocklyCheckbox');
@@ -113,7 +113,7 @@
  /**
   * @override
   */
- Blockly.FieldCheckboxUpgraded.prototype.render_ = function() {
+ Blockly.FieldCheckColors.prototype.render_ = function() {
    if (this.textContent_) {
      this.textContent_.nodeValue = this.getDisplayText_();
    }
@@ -123,8 +123,8 @@
  /**
   * @override
   */
- Blockly.FieldCheckboxUpgraded.prototype.getDisplayText_ = function() {
-   return this.checkChar_ || Blockly.FieldCheckboxUpgraded.CHECK_CHAR;
+ Blockly.FieldCheckColors.prototype.getDisplayText_ = function() {
+   return this.checkChar_ || Blockly.FieldCheckColors.CHECK_CHAR;
  };
  
  /**
@@ -132,7 +132,7 @@
   * @param {?string} character The character to use for the check mark, or
   *    null to use the default.
   */
- Blockly.FieldCheckboxUpgraded.prototype.setCheckCharacter = function(character) {
+ Blockly.FieldCheckColors.prototype.setCheckCharacter = function(character) {
    this.checkChar_ = character;
    this.forceRerender();
  };
@@ -141,7 +141,7 @@
   * Toggle the state of the checkbox on click.
   * @protected
   */
- Blockly.FieldCheckboxUpgraded.prototype.showEditor_ = function() {
+ Blockly.FieldCheckColors.prototype.showEditor_ = function() {
    this.setValue(!this.value_);
  };
  
@@ -151,7 +151,7 @@
   * @return {?string} A valid value ('TRUE' or 'FALSE), or null if invalid.
   * @protected
   */
- Blockly.FieldCheckboxUpgraded.prototype.doClassValidation_ = function(opt_newValue) {
+ Blockly.FieldCheckColors.prototype.doClassValidation_ = function(opt_newValue) {
    if (opt_newValue === true || opt_newValue === 'TRUE') {
      return 'TRUE';
    }
@@ -167,7 +167,7 @@
   * that this is a either 'TRUE' or 'FALSE'.
   * @protected
   */
- Blockly.FieldCheckboxUpgraded.prototype.doValueUpdate_ = function(newValue) {
+ Blockly.FieldCheckColors.prototype.doValueUpdate_ = function(newValue) {
    this.value_ = this.convertValueToBool_(newValue);
    // Update visual.
    if (this.textElement_) {
@@ -179,7 +179,7 @@
   * Get the value of this field, either 'TRUE' or 'FALSE'.
   * @return {string} The value of this field.
   */
- Blockly.FieldCheckboxUpgraded.prototype.getValue = function() {
+ Blockly.FieldCheckColors.prototype.getValue = function() {
    return this.value_ ? 'TRUE' : 'FALSE';
  };
  
@@ -187,7 +187,7 @@
   * Get the boolean value of this field.
   * @return {boolean} The boolean value of this field.
   */
- Blockly.FieldCheckboxUpgraded.prototype.getValueBoolean = function() {
+ Blockly.FieldCheckColors.prototype.getValueBoolean = function() {
    return /** @type {boolean} */ (this.value_);
  };
  
@@ -196,7 +196,7 @@
   * @return {string} Text representing the value of this field
   *    ('true' or 'false').
   */
- Blockly.FieldCheckboxUpgraded.prototype.getText = function() {
+ Blockly.FieldCheckColors.prototype.getText = function() {
    return String(this.convertValueToBool_(this.value_));
  };
  
@@ -209,7 +209,7 @@
   * @return {boolean} The converted value.
   * @private
   */
- Blockly.FieldCheckboxUpgraded.prototype.convertValueToBool_ = function(value) {
+ Blockly.FieldCheckColors.prototype.convertValueToBool_ = function(value) {
    if (typeof value == 'string') {
      return value == 'TRUE';
    } else {
@@ -217,5 +217,5 @@
    }
  };
  
- Blockly.fieldRegistry.register('field_checkbox_upgraded', Blockly.FieldCheckboxUpgraded);
+ Blockly.fieldRegistry.register('field_checkbox_upgraded', Blockly.FieldCheckColors);
  
