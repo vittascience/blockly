@@ -1,18 +1,17 @@
 #!/bin/bash
 
-if [ ! -z $TRAVIS ]; then echo "Executing run_all_tests.sh from $(pwd)"; fi
+if [ ! -z $CI ]; then echo "Executing run_all_tests.sh from $(pwd)"; fi
 
 # ANSI colors
 BOLD_GREEN='\033[1;32m'
 BOLD_RED='\033[1;31m'
 ANSI_RESET='\033[0m'
 
-travis_fold () {
+gh_actions_fold () {
   local startOrEnd=$1 # Either "start" or "end"
-  local id=$2         # The fold id. No spaces.
 
-  if [ ! -z $TRAVIS ]; then
-    echo "travis_fold:$startOrEnd:$id"
+  if [ ! -z $CI ]; then
+    echo "::$startOrEnd::"
   fi
 }
 
@@ -37,10 +36,10 @@ run_test_command () {
 
   echo "======================================="
   echo "== $test_id"
-  travis_fold start $test_id
+  gh_actions_fold group
   $command
   local test_result=$?
-  travis_fold end $test_id
+  gh_actions_fold endgroup
   if [ $test_result -eq 0 ]; then
     echo -e "${BOLD_GREEN}SUCCESS:${ANSI_RESET} ${test_id}"
   else
@@ -74,7 +73,7 @@ run_test_command "generators" "tests/scripts/run_generators.sh"
 run_test_command "node" "./node_modules/.bin/mocha tests/node --config tests/node/.mocharc.js"
 
 # # Attempt advanced compilation of a Blockly app.
-# run_test_command "advanced_compile" "tests/compile/compile.sh"
+# run_test_command "advanced_compile" "npm run test:compile:advanced"
 
 
 # End of tests.
