@@ -5,7 +5,7 @@
  */
 
 /**
- * @fileoverview Checkbox field.  Checked or not checked.
+ * @fileoverview Checkbox field. Filled or not filled.
  * @author l.meillier09@google.com (Léo Meillier) leomlr
  */
 'use strict';
@@ -23,7 +23,7 @@ goog.require('Blockly.utils.object');
  * Class for a checkbox field.
  * @param {string|boolean=} opt_value The initial value of the field. Should
  *    either be 'TRUE', 'FALSE' or a boolean. Defaults to 'FALSE'.
- * @param {json} style The color filled in background field when chekbox is checked, height and width.
+ * @param {Object} opt_style The color filled in background field when chekbox is checked, height and width.
  * @param {Function=} opt_validator  A function that is called to validate
  *    changes to the field's value. Takes in a value ('TRUE' or 'FALSE') &
  *    returns a validated value ('TRUE' or 'FALSE'), or null to abort the
@@ -34,10 +34,10 @@ goog.require('Blockly.utils.object');
  * @extends {Blockly.Field}
  * @constructor
  */
- Blockly.FieldCheckboxUpgraded = function(opt_value, style, opt_validator, opt_config) {
-    this.color_ = style !== undefined ? style.color : null;
-    this.height_ = style !== undefined ? style.height : null;
-    this.width_ = style !== undefined ? style.width : null;
+ Blockly.FieldCheckboxUpgraded = function(opt_value, opt_style, opt_validator, opt_config) {
+    this.color_ = opt_style !== undefined ? opt_style.color : null;
+    this.height_ = opt_style !== undefined ? opt_style.height : null;
+    this.width_ = opt_style !== undefined ? opt_style.width : null;
     Blockly.FieldCheckboxUpgraded.superClass_.constructor.call(
        this, opt_value, opt_validator, opt_config);
 };
@@ -93,7 +93,7 @@ Blockly.FieldCheckboxUpgraded.prototype.CURSOR = 'default';
  */
 Blockly.FieldCheckboxUpgraded.prototype.initView = function() {
     Blockly.FieldCheckboxUpgraded.superClass_.initView.call(this);
-    this.borderRect_.style.fill = this.value_ ? ((this.color_ && this.color_ !== 'default') ? this.color_ : Blockly.FieldCheckboxUpgraded.prototype.DEFAULT_COLOR) : 'white';
+    this.borderRect_.style.fill = this.value_ ? (this.color_ ? this.color_ : Blockly.FieldCheckboxUpgraded.prototype.DEFAULT_COLOR) : 'white';
 };
  
 /**
@@ -145,7 +145,7 @@ Blockly.FieldCheckboxUpgraded.prototype.doValueUpdate_ = function(newValue) {
         this.textElement_.style.display = this.value_ ? 'block' : 'none';
     }
     if (this.borderRect_) {
-        this.borderRect_.style.fill = this.value_ ? ((this.color_ && this.color_ !== 'default') ? this.color_ : Blockly.FieldCheckboxUpgraded.prototype.DEFAULT_COLOR) : 'white';
+        this.borderRect_.style.fill = this.value_ ? (this.color_ ? this.color_ : Blockly.FieldCheckboxUpgraded.prototype.DEFAULT_COLOR) : 'white';
     }
 };
  

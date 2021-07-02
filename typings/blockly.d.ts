@@ -4808,6 +4808,111 @@ declare module Blockly.FieldCheckbox {
     var CHECK_CHAR: string;
 }
 
+declare module Blockly {
+
+    class FieldCheckboxUpgraded extends FieldCheckboxUpgraded__Class { }
+    /** Fake class which should be extended to avoid inheriting static properties */
+    class FieldCheckboxUpgraded__Class extends Blockly.Field__Class  { 
+    
+            /**
+             * Class for a checkbox field.
+             * @param {string|boolean=} opt_value The initial value of the field. Should
+             *    either be 'TRUE', 'FALSE' or a boolean. Defaults to 'FALSE'.
+             * @param {Object} opt_style The color filled in background field when chekbox is checked, height and width.
+             * @param {Function=} opt_validator  A function that is called to validate
+             *    changes to the field's value. Takes in a value ('TRUE' or 'FALSE') &
+             *    returns a validated value ('TRUE' or 'FALSE'), or null to abort the
+             *    change.
+             * @param {Object=} opt_config A map of options used to configure the field.
+             *    for a list of properties this parameter supports.
+             * @extends {Blockly.Field}
+             * @constructor
+             */
+            constructor(opt_value?: string|boolean, opt_style?: Object, opt_validator?: Function, opt_config?: Object);
+    
+            /**
+             * The default value for this field.
+             * @type {*}
+             * @protected
+             */
+            DEFAULT_VALUE: any;
+    
+            /**
+             * Serializable fields are saved by the XML renderer, non-serializable fields
+             * are not. Editable fields should also be serializable.
+             * @type {boolean}
+             */
+            SERIALIZABLE: boolean;
+    
+            /**
+             * Mouse cursor style when over the hotspot that initiates editability.
+             */
+            CURSOR: any /*missing*/;
+
+            /**
+             * The default color for this background field.
+             * @type {*}
+             */
+            DEFAULT_COLOR: string;
+
+            /**
+             * The default size of this field.
+             * @type {*}
+             * @protected
+             */
+            DEFAULT_SIZE: number;
+    
+            /**
+             * Create the block UI for this checkbox.
+             * @package
+             */
+            initView(): void;
+    
+            /**
+             * Toggle the state of the checkbox on click.
+             * @protected
+             */
+            showEditor_(): void;
+    
+            /**
+             * Ensure that the input value is valid ('TRUE' or 'FALSE').
+             * @param {*=} opt_newValue The input value.
+             * @return {?string} A valid value ('TRUE' or 'FALSE), or null if invalid.
+             * @protected
+             */
+            doClassValidation_(opt_newValue?: any): string;
+    
+            /**
+             * Update the value of the field, and update the checkElement.
+             * @param {*} newValue The value to be saved. The default validator guarantees
+             * that this is a either 'TRUE' or 'FALSE'.
+             * @protected
+             */
+            doValueUpdate_(newValue: any): void;
+    
+            /**
+             * Get the value of this field, either 'TRUE' or 'FALSE'.
+             * @return {string} The value of this field.
+             */
+            getValue(): string;
+    
+    } 
+    
+}
+
+declare module Blockly.FieldCheckboxUpgraded {
+
+    /**
+     * Construct a FieldCheckboxUpgraded from a JSON arg object.
+     * @param {!Object} options A JSON object with options (checked).
+     * @return {!Blockly.FieldCheckboxUpgraded} The new field instance.
+     * @package
+     * @nocollapse
+     */
+    function fromJson(options: Object): Blockly.FieldCheckboxUpgraded;
+    
+}
+
 
 declare module Blockly {
 
