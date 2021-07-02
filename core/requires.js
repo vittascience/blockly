@@ -63,6 +63,7 @@ goog.require('Blockly.Mutator');
 goog.require('Blockly.Warning');
 goog.require('Blockly.FieldAngle');
 goog.require('Blockly.FieldCheckbox');
+goog.provide('Blockly.FieldCheckboxUpgraded');
 goog.require('Blockly.FieldColour');
 goog.require('Blockly.FieldDropdown');
 goog.require('Blockly.FieldLabelSerializable');
