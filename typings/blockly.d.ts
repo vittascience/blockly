@@ -4810,25 +4810,25 @@ declare module Blockly.FieldCheckbox {
 
 declare module Blockly {
 
-    class FieldCheckboxUpgraded extends FieldCheckboxUpgraded__Class { }
+    class FieldCheckColors extends FieldCheckColors__Class { }
     /** Fake class which should be extended to avoid inheriting static properties */
-    class FieldCheckboxUpgraded__Class extends Blockly.Field__Class  { 
+    class FieldCheckColors__Class extends Blockly.Field__Class  { 
     
             /**
              * Class for a checkbox field.
              * @param {string|boolean=} opt_value The initial value of the field. Should
              *    either be 'TRUE', 'FALSE' or a boolean. Defaults to 'FALSE'.
-             * @param {Object} opt_style The color filled in background field when chekbox is checked, height and width.
              * @param {Function=} opt_validator  A function that is called to validate
              *    changes to the field's value. Takes in a value ('TRUE' or 'FALSE') &
              *    returns a validated value ('TRUE' or 'FALSE'), or null to abort the
              *    change.
              * @param {Object=} opt_config A map of options used to configure the field.
+             *    See the [field creation documentation]{@link https://developers.google.com/blockly/guides/create-custom-blocks/fields/built-in-fields/checkbox#creation}
              *    for a list of properties this parameter supports.
              * @extends {Blockly.Field}
              * @constructor
              */
-            constructor(opt_value?: string|boolean, opt_style?: Object, opt_validator?: Function, opt_config?: Object);
+            constructor(opt_value?: string|boolean, opt_validator?: Function, opt_config?: Object);
     
             /**
              * The default value for this field.
@@ -4848,25 +4848,19 @@ declare module Blockly {
              * Mouse cursor style when over the hotspot that initiates editability.
              */
             CURSOR: any /*missing*/;
-
-            /**
-             * The default color for this background field.
-             * @type {*}
-             */
-            DEFAULT_COLOR: string;
-
-            /**
-             * The default size of this field.
-             * @type {*}
-             * @protected
-             */
-            DEFAULT_SIZE: number;
     
             /**
              * Create the block UI for this checkbox.
              * @package
              */
             initView(): void;
+    
+            /**
+             * Set the character used for the check mark.
+             * @param {?string} character The character to use for the check mark, or
+             *    null to use the default.
+             */
+            setCheckCharacter(character: string): void;
     
             /**
              * Toggle the state of the checkbox on click.
@@ -4896,6 +4890,18 @@ declare module Blockly {
              */
             getValue(): string;
     
+            /**
+             * Get the boolean value of this field.
+             * @return {boolean} The boolean value of this field.
+             */
+            getValueBoolean(): boolean;
+    
+            /**
+             * Get the text of this field. Used when the block is collapsed.
+             * @return {string} Text representing the value of this field
+             *    ('true' or 'false').
+             */
+            getText(): string;
     } 
     
 }
@@ -4903,7 +4909,7 @@ declare module Blockly {
 declare module Blockly.FieldCheckColors {
 
     /**
-     * Construct a FieldCheckboxUpgraded from a JSON arg object.
+     * Construct a FieldCheckColors from a JSON arg object.
      * @param {!Object} options A JSON object with options (checked).
      * @return {!Blockly.FieldCheckColors} The new field instance.
      * @package
@@ -4911,8 +4917,13 @@ declare module Blockly.FieldCheckColors {
      */
     function fromJson(options: Object): Blockly.FieldCheckColors;
 
+    /**
+     * Default character for the checkmark.
+     * @type {string}
+     * @const
+     */
+    var CHECK_CHAR: string;
 }
-
 
 declare module Blockly {
 

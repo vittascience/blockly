@@ -56,7 +56,7 @@
  Blockly.FieldCheckColors.prototype.DEFAULT_VALUE = false;
  
  /**
-  * Construct a FieldCheckboxUpgraded from a JSON arg object.
+  * Construct a FieldCheckColors from a JSON arg object.
   * @param {!Object} options A JSON object with options (checked).
   * @return {!Blockly.FieldCheckColors} The new field instance.
   * @package
@@ -217,5 +217,5 @@
    }
  };
  
- Blockly.fieldRegistry.register('field_checkbox_upgraded', Blockly.FieldCheckColors);
+ Blockly.fieldRegistry.register('field_checkcolors', Blockly.FieldCheckColors);
  
