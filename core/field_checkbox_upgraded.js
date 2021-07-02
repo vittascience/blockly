@@ -217,5 +217,5 @@
    }
  };
  
- Blockly.fieldRegistry.register('field_checkbox', Blockly.FieldCheckboxUpgraded);
+ Blockly.fieldRegistry.register('field_checkbox_upgraded', Blockly.FieldCheckboxUpgraded);
  
