@@ -22,10 +22,12 @@ async function runMochaTestsInBrowser() {
     capabilities: {
       browserName: 'chrome'
     },
-    path: '/wd/hub'
+    services: [
+      ['selenium-standalone']
+    ]
   };
-  // Run in headless mode on Travis.
-  if (process.env.TRAVIS_CI) {
+  // Run in headless mode on Github Actions.
+  if (process.env.CI) {
     options.capabilities['goog:chromeOptions'] = {
       args: ['--headless', '--no-sandbox', '--disable-dev-shm-usage']
     };
